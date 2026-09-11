@@ -1,0 +1,34 @@
+# mp3 to wav
+
+
+
+"""
+
+converts
+mp3 into a wav file
+"""
+
+# pydub module 
+from pydub import AudioSegment
+
+
+file_name_noext = "audio"
+input_file = file_name_noext +".mp3"
+output_file = file_name_noext + ".wav"
+
+
+#Decoding Processing (mp3)
+
+
+## load mp3 file and export .wav file
+
+
+decodedWavSound = AudioSegment.from_mp3(input_file)
+
+decodedWavSound.export(output_file, format = "wav"
+
+
+
+print("Conversion Complete!")
+
+#TODO: .WAV to Wave (or wavelet)  into  words 
