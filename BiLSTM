@@ -1,0 +1,235 @@
+import nltk
+import speech_recognition as sr
+
+# Download the sentence tokenizer model (only needs to be run once)
+nltk.download('punkt')
+
+
+def transcribe_audio(audio_source_path=None):
+    recognizer = sr.Recognizer() #
+    
+    # Option A: Use a local audio file
+    if audio_source_path:
+        with sr.AudioFile(audio_source_path) as source:
+            audio_data = recognizer.record(source)
+    # Option B: Use live microphone if no file is provided
+    else:
+        print("Please speak into your microphone...")
+        with sr.Microphone() as source: #
+            recognizer.adjust_for_ambient_noise(source)
+            audio_data = recognizer.listen(source) #
+
+    try:
+        # Convert audio to text using Google's free Web Speech API
+        text = recognizer.recognize_google(audio_data) #
+        return text
+    except sr.UnknownValueError: #
+        print("Google Speech Recognition could not understand the audio.")
+        return ""
+    except sr.RequestError as e: #
+        print(f"Could not request results from Google service; {e}")
+        return ""
+
+
+##AI Mode Conversation: python speech recognition group by scentences step by steppython speech recognition group by scentences step by stepTo group speech recognition text by sentences in Python, you need a two-part process: first, transcribing the speech into a block of text, and second, using a Natural Language Processing (NLP) library to intelligently split and group that text into clean sentences.Standard speech-to-text APIs often return text without formatting, so relying on tools like nltk or spaCy ensures accurate sentence boundary detection.Here is a step-by-step guide to achieving this using the SpeechRecognition package and nltk (Natural Language Toolkit). [1] (https://realpython.com/python-speech-recognition/)Step 1: Install the Required LibrariesYou will need libraries for handling the audio recognition and processing the sentence structures. Run the following commands in your terminal:bashpip install SpeechRecognition
+##pip install nltk
+# If you plan to use your microphone live, you also need pyaudio:
+## pip install pyaudio
+## Use code with caution.Step 2: Set Up and Download NLTK TokenizersBefore splitting sentences, nltk requires a pre-trained punctuation model called Punkt. Create your Python script and add the setup download:pythonimport nltk
+import speech_recognition as sr
+
+
+
+def get_audio_data():
+
+    recognizer = sr.Recognizer() #
+    
+    # Option A: Use a local audio file
+    if audio_source_path:
+        with sr.AudioFile(audio_source_path) as source:
+            audio_data = recognizer.record(source)
+    # Option B: Use live microphone if no file is provided
+    else:
+        print("Please speak into your microphone...")
+        with sr.Microphone() as source: #
+            
+            recognizer.adjust_for_ambient_noise(source)
+            audio_data = recognizer.listen(source) #
+
+    return audio_data
+
+def recongnize(audio_data):
+    """reads an audio data file transcribes it into readable words """ 
+
+    try:
+        # Convert audio to text using Google's free Web Speech API
+        text = recognizer.recognize_google(audio_data) #
+        return text
+    except sr.UnknownValueError: #
+        print("Google Speech Recognition could not understand the audio.")
+        return ""
+    except sr.RequestError as e: #
+        print(f"Could not request results from Google service; {e}")
+        return ""
+    ## Use code with caution.Step 4: Group the Transcribed Text into SentencesOnce you have the raw text string, pass it to NLTK's sent_tokenize function. It safely identifies abbreviations, initials, and traditional punctuation marks to correctly isolate sentences.pythondef group_by_sentences(raw_text):
+        if not raw_text:
+            return []
+    catch(Exception e):
+        print("Exception: "+e)
+
+
+def get_audio_data(audio_source_path):
+    # Option A: Use a local audio file
+    if audio_source_path:
+        with sr.AudioFile(audio_source_path) as source:
+        audio_data = recognizer.record(source)
+    # Option B: Use live microphone if no file is provided
+    else:
+        print("Please speak into your microphone...")
+        with sr.Microphone() as source: #
+            recognizer.adjust_for_ambient_noise(source)
+            audio_data = recognizer.listen(source) #
+    return audio_data
+
+def google_recognize():
+    try:
+        # Convert audio to text using Google's free Web Speech API
+        text = recognizer.recognize_google(audio_data) #
+        return text
+    except sr.UnknownValueError: #
+        print("Google Speech Recognition could not understand the audio.")
+        return ""
+    except sr.RequestError as e: #
+        print(f"Could not request results from Google service; {e}")
+        return ""
+## Use code with caution.Step 4: Group the Transcribed Text into SentencesOnce you have the raw text string, pass it to NLTK's sent_tokenize function. It safely identifies abbreviations, initials, and traditional punctuation marks to correctly isolate sentences.pythondef group_by_sentences(raw_text):
+    if not raw_text:
+        return []
+    catch Exception e:
+        print("Exception: "+ e)
+
+def text2sentence( text):
+    # NLTK intelligently splits raw paragraphs into a list of individual sentences
+    sentences = nltk.sent_tokenize(text)
+    return sentences
+    
+# Download the sentence tokenizer model (only needs to be run once)
+nltk.download('punkt')
+## Use code with caution.Step 3: Transcribe Speech to TextInitialize the speech recognizer. You can load a pre-recorded .wav file or use your live microphone as the audio source. [1] (https://www.youtube.com/watch?v=mYUyaKmvu6Y), [2] (https://www.youtube.com/watch?v=eykWtp-Bt8A&t=112), [3] (https://www.youtube.com/watch?v=Ot0TjanvMxM)pythondef transcribe_audio(audio_source_path=None):
+recognizer = sr.Recognizer() #
+audio_data = get_audio_data()
+text= recongnize(audio_data)
+
+audio_data = get_audio_data(audio_source_path)
+
+
+
+
+"""
+    # Option A: Use a local audio file
+if audio_source_path:
+    with sr.AudioFile(audio_source_path) as source:
+            audio_data = recognizer.record(source)
+    # Option B: Use live microphone if no file is provided
+else:
+    print("Please speak into your microphone...")
+    with sr.Microphone() as source: #
+        recognizer.adjust_for_ambient_noise(source)
+        audio_data = recognizer.listen(source) #
+"""
+    try:
+        # Convert audio to text using Google's free Web Speech API
+        text = recognizer.recognize_google(audio_data) #
+        return text
+    except sr.UnknownValueError: #
+        print("Google Speech Recognition could not understand the audio.")
+        return ""
+    except sr.RequestError as e: #
+        print(f"Could not request results from Google service; {e}")
+        return ""
+## Use code with caution.Step 4: Group the Transcribed Text into SentencesOnce you have the raw text string, pass it to NLTK's sent_tokenize function. It safely identifies abbreviations, initials, and traditional punctuation marks to correctly isolate sentences.pythondef group_by_sentences(raw_text):
+    if not raw_text:
+        return []
+    
+    # NLTK intelligently splits raw paragraphs into a list of individual sentences
+    sentences = nltk.sent_tokenize(raw_text)
+    return sentences
+
+
+import os
+import wave
+import json
+from vosk import Model, KaldiRecognizer
+from docx import Document
+
+def transcribe_wav_to_word(audio_path, model_path, output_docx_path):
+    # 1. Verify audio file exists and is mono
+    if not os.path.exists(audio_path):
+        raise FileNotFoundError(f"Audio file not found: {audio_path}")
+        
+    wf = wave.open(audio_path, "rb")
+    if wf.getnchannels() != 1:
+        raise ValueError("Vosk requires a MONO WAV file. Please convert your stereo file to mono first.")
+
+    # 2. Load the Vosk model
+    print("Loading Vosk model... (this may take a few seconds)")
+    if not os.path.exists(model_path):
+        raise FileNotFoundError(f"Model directory not found at: {model_path}. Please download one from alphacephei.com/vosk/models")
+    
+    model = Model(model_path)
+    
+    # 3. Initialize the recognizer with the audio file's sample rate
+    sample_rate = wf.getframerate()
+    recognizer = KaldiRecognizer(model, sample_rate)
+    
+    # Optional: If you want word timestamps, uncomment the line below:
+    # recognizer.SetWords(True)
+
+    print("Transcribing audio...")
+    full_transcript = []
+
+    # 4. Stream and process the audio file in chunks to save memory
+    chunk_size = 4000
+    while True:
+        data = wf.readframes(chunk_size)
+        if len(data) == 0:
+            break
+        
+        if recognizer.AcceptWaveform(data):
+            # Partial results are finalized here as phrases
+            result_json = json.loads(recognizer.Result())
+            if "text" in result_json and result_json["text"]:
+                full_transcript.append(result_json["text"])
+
+    # Get the last remaining words
+    final_result = json.loads(recognizer.FinalResult())
+    if "text" in final_result and final_result["text"]:
+        full_transcript.append(final_result["text"])
+
+    wf.close()
+    
+    # Combine all phrases into one coherent text block
+    complete_text = " ".join(full_transcript)
+    print("\nTranscription complete!")
+
+    # 5. Save the text into a Word Document (.docx)
+    print(f"Saving transcription to {output_docx_path}...")
+    doc = Document()
+    doc.add_heading('Audio Transcription', level=1)
+    doc.add_paragraph(complete_text)
+    doc.save(output_docx_path)
+    print("File saved successfully.")
+
+# --- Configuration ---
+if __name__ == "__main__":
+    # Path to your downloaded and unzipped Vosk model folder
+    MODEL_DIR = "vosk-model-small-en-us-0.15" 
+    
+    # Path to your MONO wav file
+    AUDIO_FILE = "speech.wav" 
+    
+    # Desired Word document output name
+    OUTPUT_DOCX = "transcription_output.docx"
+
+    transcribe_wav_to_word(AUDIO_FILE, MODEL_DIR, OUTPUT_DOCX)
+
